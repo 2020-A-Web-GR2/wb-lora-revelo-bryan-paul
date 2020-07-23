@@ -10,7 +10,8 @@ import {
     Post,
     Query,
     Req,
-    Res
+    Res,
+    Headers
 } from "@nestjs/common";
 import {MascotaCreateDto} from "./dto/mascota.create-dto";
 import {validate, ValidationError} from "class-validator";
@@ -73,7 +74,7 @@ export class HttpJuegoController {
             return parametrosDeConsulta.nombre + ' ' + parametrosDeConsulta.apellido;
         } else {
             console.log('asd');
-            return '>(';
+            return ':(';
         }
 
     }
@@ -115,13 +116,58 @@ export class HttpJuegoController {
         @Res() res
     ) {
         res.cookie(
-            'galletaInsergura', //nombre
+            'galletaInsegura', //nombre
             'tengo hambre', //valor
         );
         const mensaje = {
             mensaje: 'ok'
         };
 //return mensaje;// no se puede usar return cuando se usa @Res()!
+        res.send(mensaje);
+    }
+
+    @Get('guardarCookieSegura')
+    guardarCookieSegura(
+        @Query() parametrosDeConsulta,
+        @Req() req,
+        @Res() res
+    ) {
+        res.cookie(
+            'galletaSegura', //nombre
+            'Cookie segura web', //valor
+            {
+                secure: true
+            }
+        );
+        const mensaje = {
+            mensaje: 'ok'
+        };
+//return mensaje;// no se puede usar return cuando se usa @Res()!
+        res.send(mensaje);
+    }
+
+    @Get('mostrarCookies')
+    mostrarCookies(
+        @Req() req
+    ){
+        const mensaje = {
+            sinFirmar: req.cookies,
+            firmadas: req.signedCookies
+        };
+        return mensaje;
+    }
+
+    @Get('guardarCookieFirmada')
+    guardarCookieFirmada(
+        @Res() res,
+        @Headers() headers
+    ){
+        console.log('Headers', headers)
+        res.header('Cabecera', "dinámica")
+        res.cookie('firmada', 'poliburguer',{signed: true});
+        const mensaje = {
+            mensaje: 'ok'
+        };
         res.send(mensaje);
     }
 }

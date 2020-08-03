@@ -8,7 +8,7 @@ async function bootstrap() {
     /*
     Configuracion antes de app.listen
      */
-    app.use(cookieParser());
+    app.use(cookieParser('Firma de Paul'));
     await app.listen(3001);
 }
 

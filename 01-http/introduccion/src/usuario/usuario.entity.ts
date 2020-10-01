@@ -1,8 +1,9 @@
-import {Column, Entity, Index, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {MascotaEntity} from "../mascota/mascota.entity";
 
 @Index(['nombre', 'apellido', 'cedula', 'fechaNacimiento'])
-@Index( //indice compuesto
-    ['nombre', 'apellido', 'cedula'], {unique: true})
+//@Index( //indice compuesto
+//    ['nombre', 'apellido', 'cedula'], {unique: true})
 @Entity('db_usuario') //nombre tabla usuario
 export class UsuarioEntity {
     @PrimaryGeneratedColumn({
@@ -58,4 +59,11 @@ export class UsuarioEntity {
         type: 'datetime',
     })
     fechaHoraNacimiento?: string;
+
+    @OneToMany(
+        type => MascotaEntity, //Con que entidad se relaciona
+        mascota => mascota.usuario //Campo con el que se relaciona
+    )
+    mascotas: MascotaEntity[];
+
 }

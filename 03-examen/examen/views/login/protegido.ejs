@@ -1,0 +1,12 @@
+<% const esSupervisor = roles.some((rol) => rol == 'Supervisor') %>
+<% const esAdministrador = roles.some((rol) => rol == 'Administrador') %>
+<p>Bienvenido <%= usuario %></p>
+<% if(esSupervisor){ %>
+    <a href="/doctor/inicio/vista/?error=Biendevicosupervisor">Entrar</a>
+<% } %>
+<% if(esAdministrador){ %>
+    <a href="/doctor/inicio/vista/?error=bienvenido administrado">Entrar</a>
+<% } %>
+<a href="/logout">
+    <button>Logout</button>
+</a>

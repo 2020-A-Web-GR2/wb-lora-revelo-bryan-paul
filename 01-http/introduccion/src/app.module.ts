@@ -6,6 +6,10 @@ import {HttpCalculadoraModule} from "./http-calculadora/http-calculadora.module"
 import {UsuarioModule} from "./usuario/usuario-module";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {UsuarioEntity} from "./usuario/usuario.entity";
+import {VacunaModule} from "./vacuna/vacuna-module";
+import {MascotaModule} from "./mascota/mascota-module";
+import {MascotaEntity} from "./mascota/mascota.entity";
+import {VacunaEntity} from "./vacuna/vacuna.entity";
 
 @Module({
     imports: [
@@ -13,6 +17,8 @@ import {UsuarioEntity} from "./usuario/usuario.entity";
         HttpJuegoModule,
         HttpCalculadoraModule,
         UsuarioModule,
+        MascotaModule,
+        VacunaModule,
         TypeOrmModule.forRoot({
             //Cadena de conexion
             name: 'default', //nombre de la conexion
@@ -23,10 +29,12 @@ import {UsuarioEntity} from "./usuario/usuario.entity";
             password: '099051271Paul', //contrasena
             database: 'ejemplo', //Base de datos
             entities: [ //Todas las entidades que se van a usar o conectar
-                UsuarioEntity
+                UsuarioEntity,
+                MascotaEntity,
+                VacunaEntity,
             ],
             synchronize: true, //Actualiza el esquema de la bdd
-            dropSchema: false, //Eliminar datos y el esquema de la bdd
+            dropSchema: true, //Eliminar datos y el esquema de la bdd
         }),
     ],
     controllers: [

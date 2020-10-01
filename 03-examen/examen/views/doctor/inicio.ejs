@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Doctores</title>
+
+    <%- include("../compartido/estilos-generales/estilos-generales-component.ejs") %>
+
+</head>
+<body>
+<%- include('../compartido/menu/menu-component') %>
+
+<% if(typeof error !== 'undefined') { %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%= error %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<% } %>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre Completo</th>
+            <th scope="col">Cedula</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Sueldo</th>
+            <th scope="col">Lugar de Trabajo</th>
+            <th scope="col">Nacionalidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% arregloDoctores.forEach((objeto)=>{ %>
+            <tr>
+                <th scope="row"><%= objeto.id %></th>
+                <td><%= objeto.nombreCompleto %></td>
+                <td><%= objeto.cedula %></td>
+                <td><%= objeto.especialidad %></td>
+                <td><%= objeto.sueldo %></td>
+                <td><%= objeto.lugarDeTrabajo %></td>
+                <td><%= objeto.nacionalidad %></td>
+                <td>
+                    <a href="/doctor/vista/editar/<%= objeto.id %>">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Editar</button>
+                    </a>
+                    <form action="/doctor/eliminarDesdeVista/<%= objeto.id %>" method="POST">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include("../compartido/funcionalidad-general/funcionalidad-general-component.ejs") %>
+</body>
+</html>

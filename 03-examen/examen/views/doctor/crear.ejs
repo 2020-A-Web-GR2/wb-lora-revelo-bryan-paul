@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Crear</title>
+
+    <style>
+
+    </style>
+    <%- include("../compartido/estilos-generales/estilos-generales-component.ejs") %>
+
+</head>
+<body>
+<%- include('../compartido/menu/menu-component') %>
+
+<% if(typeof error !== 'undefined') { %>
+    <div class="alert alert-danger" role="alert">
+        <%= error %>
+    </div>
+<% } %>
+
+<% const existeDoctor = typeof doctor != 'undefined' %>
+
+<h1 class="text-center"><%= existeDoctor ? 'Editar' : 'Crear' %> Doctor</h1>
+
+<!--Setear el nombre y el apellido-->
+<% let existeNombreCompleto = typeof nombreCompleto !== 'undefined' %>
+<% let existeCedula = typeof cedula !== 'undefined' %>
+<% let existeEspecialidad = typeof especialidad !== 'undefined' %>
+<% let existeSueldo = typeof sueldo !== 'undefined' %>
+<% let existeLugarDeTrabajo = typeof lugarDeTrabajo !== 'undefined' %>
+<% let existeNacionalidad = typeof nacionalidad !== 'undefined' %>
+
+<% if(existeDoctor){ %>
+    <% existeNombreCompleto = true %>
+    <% existeCedula = true %>
+    <% existeEspecialidad = true %>
+    <% existeSueldo = true %>
+    <% existeLugarDeTrabajo = true %>
+    <% existeNacionalidad = true %>
+
+    <% nombreCompleto = doctor.nombreCompleto %>
+    <% cedula = doctor.cedula %>
+    <% especialidad = doctor.especialidad %>
+    <% sueldo = doctor.sueldo %>
+    <% lugarDeTrabajo = doctor.lugarDeTrabajo %>
+    <% nacionalidad = doctor.nacionalidad %>
+<% } %>
+
+
+
+<form class="form-horizontal"
+      action="<%= existeDoctor ? '/doctor/editarDesdeVista/' + doctor.id : '/doctor/crearDesdeVista' %>"
+      method="POST">
+    <div class="form-group">
+        <label for="nombreCompletoID" class="control-labelcol-sm-2"></label>
+        <div class="col-sm-4">
+            <input id="nombreCompletoID" type="text" name="nombreCompleto" class="form-control"
+                   placeholder="Ingrese el nombre completo" value="<%= existeNombreCompleto ? nombreCompleto : '' %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="cedulaID" class="control-labelcol-sm-2"></label>
+        <div class="col-sm-2">
+            <input id="cedulaID" type="text" name="cedula" class="form-control" placeholder="Ingrese la cedula"
+            <% if(existeDoctor){ %>
+                   disabled
+                    <% } %>
+                   value="<%= existeCedula ? cedula : '' %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="especialidadID" class="control-labelcol-sm-2"></label>
+        <div class="col-sm-4">
+            <input id="especialidadID" type="text" name="especialidad" class="form-control"
+                   placeholder="Ingrese la especialidad" value="<%= existeEspecialidad ? especialidad : '' %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sueldoID" class="control-labelcol-sm-2"></label>
+        <div class="col-sm-2">
+            <input id="sueldoID" type="text" name="sueldo" class="form-control"
+                   placeholder="Ingrese el sueldo" value="<%= existeSueldo? sueldo : '' %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lugarDeTrabajoID" class="control-labelcol-sm-2"></label>
+        <div class="col-sm-4">
+            <input id="lugarDeTrabajoID" type="text" name="lugarDeTrabajo" class="form-control"
+                   placeholder="Ingrese el lugar de trabajo" value="<%= existeLugarDeTrabajo ? lugarDeTrabajo : '' %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="nacionalidadID" class="control-labelcol-sm-2"></label>
+        <div class="col-sm-4">
+            <input id="nacionalidadID" type="text" name="nacionalidad" class="form-control"
+                   placeholder="Ingrese la nacionalidad" value="<%= existeNacionalidad ? nacionalidad : '' %>">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-6">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Enviar</button>
+        </div>
+    </div>
+</form>
+
+
+<%- include("../compartido/funcionalidad-general/funcionalidad-general-component.ejs") %>
+</body>
+</html>

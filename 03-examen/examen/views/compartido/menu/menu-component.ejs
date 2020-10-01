@@ -1,0 +1,32 @@
+<%- include("../estilos-generales/estilos-generales-component.ejs") %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Doctores</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/doctor/vista/inicio">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/doctor/vista/crear">Crear Doctor</a>
+            </li>
+        </ul>
+        <form action="/doctor/vista/inicio" method="GET" class="form-inline my-2 my-lg-0">
+            <input id="busqueda" name="busqueda" class="form-control mr-sm-2" type="text" placeholder="Busqueda"
+                   aria-label="Busqueda">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+
+        <a class="nav-link" href="/autenticacion/logout">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerrar Sesion</button>
+        </a>
+
+    </div>
+</nav>
+
+<%- include("../funcionalidad-general/funcionalidad-general-component.ejs") %>

@@ -34,7 +34,7 @@ import {VacunaEntity} from "./vacuna/vacuna.entity";
                 VacunaEntity,
             ],
             synchronize: true, //Actualiza el esquema de la bdd
-            dropSchema: false, //Eliminar datos y el esquema de la bdd
+            dropSchema: true, //Eliminar datos y el esquema de la bdd
         }),
     ],
     controllers: [
